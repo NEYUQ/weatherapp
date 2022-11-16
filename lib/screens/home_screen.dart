@@ -24,9 +24,12 @@ class _HomeScreenState extends State<HomeScreen> {
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
-              : Container(
-            child: Text("Test"),
-          ),
+              : ListView(
+                  scrollDirection: Axis.vertical,
+                  children: [
+                    const Header(),
+                  ],
+                ),
         ),
       ),
     );
