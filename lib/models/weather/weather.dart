@@ -1,7 +1,6 @@
 import 'current.dart';
 import 'daily.dart';
 import 'hourly.dart';
-import 'minutely.dart';
 
 class Weather {
   double? lat;
@@ -9,7 +8,6 @@ class Weather {
   String? timezone;
   int? timezoneOffset;
   Current? current;
-  List<Minutely>? minutely;
   List<Hourly>? hourly;
   List<Daily>? daily;
 
@@ -19,7 +17,6 @@ class Weather {
     this.timezone,
     this.timezoneOffset,
     this.current,
-    this.minutely,
     this.hourly,
     this.daily,
   });
@@ -32,9 +29,6 @@ class Weather {
         current: json['current'] == null
             ? null
             : Current.fromJson(json['current'] as Map<String, dynamic>),
-        minutely: (json['minutely'] as List<dynamic>?)
-            ?.map((e) => Minutely.fromJson(e as Map<String, dynamic>))
-            .toList(),
         hourly: (json['hourly'] as List<dynamic>?)
             ?.map((e) => Hourly.fromJson(e as Map<String, dynamic>))
             .toList(),
@@ -49,7 +43,6 @@ class Weather {
         'timezone': timezone,
         'timezone_offset': timezoneOffset,
         'current': current?.toJson(),
-        'minutely': minutely?.map((e) => e.toJson()).toList(),
         'hourly': hourly?.map((e) => e.toJson()).toList(),
         'daily': daily?.map((e) => e.toJson()).toList(),
       };

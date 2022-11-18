@@ -28,7 +28,6 @@ class _HeaderWidgetState extends State<HeaderWidget> {
   getAddress(lat, lon) async {
     List<Placemark> placemarks = await placemarkFromCoordinates(lat, lon);
     Placemark place = placemarks[0];
-    print(place.locality);
     setState(() {
       city = place.administrativeArea!;
     });
