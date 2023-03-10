@@ -4,8 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:weatherapp/controllers/global_controller.dart';
 import 'package:weatherapp/widgets/Header.dart';
+import 'package:weatherapp/widgets/comfort_level.dart';
 import 'package:weatherapp/widgets/current_weather.dart';
 import 'package:weatherapp/widgets/hourly_data_widget.dart';
+
+import '../utils/custom_colors.dart';
+import '../widgets/daily_data_forecast.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,8 +28,18 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: Obx(
           () => _globalController.checkLoading().isTrue
-              ? const Center(
-                  child: CircularProgressIndicator(),
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        "assets/icons/clouds.png",
+                        height: 200,
+                        width: 200,
+                      ),
+                      const CircularProgressIndicator(),
+                    ],
+                  ),
                 )
               : Center(
                   child: ListView(
@@ -44,9 +58,26 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 20.0,
                       ),
                       HourlyDataWidget(
-                          weatherDataHourly: _globalController
+                        weatherDataHourly: _globalController
+                            .getWeatherData()
+                            .getHourlyWeather(),
+                      ),
+                      DailyDataForecast(
+                        weatherDataDaily: _globalController
+                            .getWeatherData()
+                            .getDailyWeather(),
+                      ),
+                      Container(
+                        height: 1,
+                        color: CustomColors.dividerLine,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      ComfortLevel(
+                          weatherDataCurren: _globalController
                               .getWeatherData()
-                              .getHourlyWeather())
+                              .getCurrentWeather())
                     ],
                   ),
                 ),

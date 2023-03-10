@@ -4,6 +4,7 @@ import 'package:weatherapp/apis/fetch_weather.dart';
 import 'package:weatherapp/models/weather_data.dart';
 
 class GlobalController extends GetxController {
+  GetView? f;
   //create various variable
   final RxBool _isLoading = true.obs;
   final RxDouble _lattitude = 0.0.obs;
